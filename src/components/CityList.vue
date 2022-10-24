@@ -5,6 +5,7 @@ import { useRouter } from "vue-router";
 import CityCard from "./CityCard.vue";
 
 const savedCities = ref([]);
+const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
 const getCities = async () => {
   if (localStorage.getItem("savedCities")) {
     savedCities.value = JSON.parse(localStorage.getItem("savedCities"));
@@ -13,7 +14,7 @@ const getCities = async () => {
     savedCities.value.forEach((city) => {
       requests.push(
         axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${city.coords.lat}&lon=${city.coords.lng}&appid=8736dc7d077459b0cd07547cce932293&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${city.coords.lat}&lon=${city.coords.lng}&appid=${apiKey}&units=metric`
         )
       );
     });
